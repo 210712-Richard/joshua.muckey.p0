@@ -2,6 +2,7 @@ package com.revature.state;
 
 import com.revature.models.User;
 import com.revature.models.UserBase;
+import com.revature.util.DataSerializer;
 
 public class UserState {
 
@@ -12,6 +13,9 @@ public class UserState {
 		selectedUser = users.getUser(attempt);
 		return selectedUser != null ? true : false;
 		
+	}
+	public void save() {
+		users.save();
 	}
 
 }

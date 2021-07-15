@@ -1,7 +1,10 @@
 package com.revature.models;
 
-public class User {
+import java.io.Serializable;
 
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 2410782848277166301L;
 	private String username;
 	private String adventureFileName;
 	private UserType type;

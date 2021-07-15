@@ -10,7 +10,7 @@ public class UserBase implements Serializable{
 	//this class handles user data
 	private static final long serialVersionUID = 5529604745131923690L;
 	private MyList list = new MyList();
-	private final String userDataBase = "users.dat";
+	private final String userDataBase = System.getProperty("user.dir")+"\\src\\main\\java\\com\\revature\\resources";
 	
 	class MyList implements Serializable{
 		//wrapper class to make serialization easier
@@ -23,6 +23,7 @@ public class UserBase implements Serializable{
 		DataSerializer<MyList> ds = new DataSerializer<MyList>();
 		list = (MyList) ds.readObjectFromFile(userDataBase);
 		if(list == null) {
+			System.out.println("new list");
 			list = new MyList();
 			list.users = new LinkedList<User>();
 			list.users.add(new User("joshua"));
@@ -41,6 +42,11 @@ public class UserBase implements Serializable{
 			}
 		}
 		return null;
+	}
+	
+	public void save() {
+		DataSerializer<MyList> ds = new DataSerializer<MyList>();
+		ds.writeObjectsToFile(list, userDataBase);
 	}
 	
 	

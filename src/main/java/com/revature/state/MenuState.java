@@ -13,11 +13,12 @@ public class MenuState {
 			loginAttempt = menuOptions.loginMenu();
 			GameState.notifyLogin();
 			break;
-		case 2:
+		case 2://register
 			menuOptions.registerMenu();
 			break;
-		case 3:
+		case 3://quit
 			menuOptions.quit();
+			GameState.notifyQuit();
 			break;
 		default:
 			System.out.println("Invalid Response please try again.");
