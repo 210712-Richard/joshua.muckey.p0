@@ -31,8 +31,8 @@ public class MenuState {
 	}
 
 	public void successfulLogin() {
-		// TODO Auto-generated method stub
-		System.out.println("Successful!");
+		System.out.println("Successful Login!");
+		
 		
 	}
 
