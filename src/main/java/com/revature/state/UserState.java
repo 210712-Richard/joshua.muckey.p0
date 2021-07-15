@@ -1,8 +1,7 @@
 package com.revature.state;
 
-import com.revature.models.User;
-import com.revature.models.UserBase;
-import com.revature.util.DataSerializer;
+import com.revature.users.User;
+import com.revature.users.UserBase;
 
 public class UserState {
 
@@ -12,7 +11,9 @@ public class UserState {
 	public boolean login(String attempt) {
 		selectedUser = users.getUser(attempt);
 		return selectedUser != null ? true : false;
-		
+	}
+	public int getType() {
+		return selectedUser.getType().ordinal();
 	}
 	public void save() {
 		users.save();

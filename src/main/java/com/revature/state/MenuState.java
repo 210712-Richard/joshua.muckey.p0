@@ -1,46 +1,38 @@
 package com.revature.state;
 
+import com.revature.menu.StartMenu;
 import com.revature.menu.Menu;
 
 public class MenuState {
-	
-	private Menu menuOptions = new Menu();
+
+	private Menu currentMenu;
 	private String loginAttempt = null;
-	
-	public void openMenu() {
-		switch(menuOptions.startMenu()) {
-		case 1://login
-			loginAttempt = menuOptions.loginMenu();
-			GameState.notifyLogin();
-			break;
-		case 2://register
-			menuOptions.registerMenu();
-			break;
-		case 3://quit
-			menuOptions.quit();
-			GameState.notifyQuit();
-			break;
-		default:
-			System.out.println("Invalid Response please try again.");
-			openMenu();
-		}
-				
+	private int type = 0;
+
+	MenuState() {
+		currentMenu = new StartMenu();
 	}
-	
+
+	public void openMenu() {
+		while (currentMenu != null) {
+			currentMenu = currentMenu.printMenu();
+		}
+	}
+
 	public String getAttempt() {
 		return loginAttempt;
 	}
 
 	public void successfulLogin() {
-		System.out.println("Successful Login!");
-		
-		
+		System.out.println("Successful Login " + (type == 1 ? "Admin!" : "Player"));
 	}
 
 	public void tryAgain() {
-
 		System.out.println("Sorry try again");
-		
+	}
+
+	public void type(int type) {
+		this.type = type;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.revature.models;
+package com.revature.users;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ public class UserBase implements Serializable{
 	//this class handles user data
 	private static final long serialVersionUID = 5529604745131923690L;
 	private MyList list = new MyList();
-	private final String userDataBase = System.getProperty("user.dir")+"\\src\\main\\java\\com\\revature\\resources";
+	private final String userDataBase = System.getProperty("user.dir")+"\\src\\main\\java\\com\\revature\\resources\\users.dat";
 	
 	class MyList implements Serializable{
 		//wrapper class to make serialization easier
