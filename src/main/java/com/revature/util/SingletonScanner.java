@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class SingletonScanner {
 	private static SingletonScanner instance;
 
-	private Scanner scan;
+	private static Scanner scan;
 
 	private SingletonScanner() {
 		scan = new Scanner(System.in);
@@ -18,7 +18,11 @@ public class SingletonScanner {
 		return instance;
 	}
 
-	public Scanner getScan() {
+	public static Scanner getScan() {
 		return scan;
+	}
+	
+	public String getNext() {
+		return scan.nextLine();
 	}
 }

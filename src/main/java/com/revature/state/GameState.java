@@ -1,12 +1,28 @@
 package com.revature.state;
 
-import com.revature.menu.Menu;
-
 public class GameState {
 
-	public static void main(String[] args) {
-		Menu menu = new Menu();
-		menu.startMenu();
+		private MenuState menu = new MenuState();
+		private UserState user = new UserState();
+		private static boolean loginAttempt = false;
 		
-	}
+		public void run() {
+			while(true) {
+				menu.openMenu();
+				if(loginAttempt) {
+					if(user.login(menu.getAttempt())) {
+						menu.successfulLogin();
+					}else {
+						menu.tryAgain();
+					}
+					
+				}
+					
+			}
+		}
+		
+		public static void notifyLogin() {
+			loginAttempt = true;
+			
+		}
 }

@@ -15,7 +15,8 @@ public class DataSerializer<T> {
 		try (ObjectInputStream o = new ObjectInputStream(new FileInputStream(filename));) {
 			object = (T) o.readObject();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			return null;
 		}
 		return object;
 	}
