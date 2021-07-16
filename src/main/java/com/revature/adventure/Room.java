@@ -1,6 +1,7 @@
 package com.revature.adventure;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 public abstract class Room implements Serializable{
 
@@ -10,24 +11,12 @@ public abstract class Room implements Serializable{
 	private static final long serialVersionUID = -740387222736760593L;
 
 	private String description;
-	private IAction[] takeableActions;
+	private LinkedList<IAction> takeableActions = new LinkedList<IAction>();
 	private Room nextRoom;
 	private Room previousRoom;
 	
-	public Room(String description, IAction[] takeableActions) {
-		super();
-		this.description = description;
-		this.takeableActions = takeableActions;
-	}
-	
-	public Room(String description, IAction[] takeableActions, Room nextRoom, Room previousRoom) {
-		super();
-		this.description = description;
-		this.takeableActions = takeableActions;
-		this.nextRoom = nextRoom;
-		this.previousRoom = previousRoom;
-	}
 	public abstract void enterRoom();
+	public abstract void setupRoom();
 
 	public final String getDescription() {
 		return description;
@@ -35,10 +24,10 @@ public abstract class Room implements Serializable{
 	public final void setDescription(String description) {
 		this.description = description;
 	}
-	public final IAction[] getTakeableActions() {
+	public final LinkedList<IAction> getTakeableActions() {
 		return takeableActions;
 	}
-	public final void setTakeableActions(IAction[] takeableActions) {
+	public final void setTakeableActions(LinkedList<IAction> takeableActions) {
 		this.takeableActions = takeableActions;
 	}
 	public final Room getNextRoom() {

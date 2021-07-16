@@ -19,5 +19,7 @@ public class Adventure implements Serializable{
 		private LinkedList<Room> rooms = new LinkedList<Room>();
 		
 	}
+	
+	
 
 }
