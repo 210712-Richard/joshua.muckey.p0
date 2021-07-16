@@ -11,10 +11,10 @@ public class StartMenu extends Menu {
 		
 				System.out.println(line);
 				System.out.println("|Welcome to Text Adventure!|");
-				System.out.println("|"+repeatedString(5,  " ")+"By Joshua Muckey" +repeatedString(5, " ")+"|");
+				System.out.println("|"+Menu.repeatedString(5,  " ")+"By Joshua Muckey" +Menu.repeatedString(5, " ")+"|");
 				System.out.println("|What would you like to do?|");
-				System.out.println("|"+"\t1. Login"+ repeatedString(11, " ")+"|");
-				System.out.println("|"+"\t2. Register" + repeatedString(8, " ")+"|");
+				System.out.println("|"+"\t1. Login"+ Menu.repeatedString(11, " ")+"|");
+				System.out.println("|"+"\t2. Register" + Menu.repeatedString(8, " ")+"|");
 				System.out.println("\t3. Quit");
 				int selection;
 				try {

@@ -2,8 +2,8 @@ package com.revature.state;
 
 public class GameState {
 
-		private MenuState menu = new MenuState();
-		private UserState user = new UserState();
+		private static MenuState menu = new MenuState();
+		private static UserState user = new UserState();
 		private static boolean loginAttempt = false;
 		private static boolean quit = false;
 		
@@ -28,8 +28,12 @@ public class GameState {
 			}
 		}
 
-		public static void notifyLogin() {
-			loginAttempt = true;
+		public static boolean notifyLogin() {
+			if(user.login(menu.getAttempt())) {
+				menu.type(user.getType());
+				return true;
+			}
+			return false;
 		}
 
 		public static void notifyQuit() {

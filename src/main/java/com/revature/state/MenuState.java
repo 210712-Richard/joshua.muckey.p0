@@ -1,6 +1,7 @@
 package com.revature.state;
 
 import com.revature.menu.StartMenu;
+import com.revature.menu.LoginResponseMenu;
 import com.revature.menu.Menu;
 
 public class MenuState {
@@ -16,6 +17,11 @@ public class MenuState {
 	public void openMenu() {
 		while (currentMenu != null) {
 			currentMenu = currentMenu.printMenu();
+			if(currentMenu instanceof LoginResponseMenu) {
+				LoginResponseMenu temp = ((LoginResponseMenu)currentMenu);
+				temp.setType(type);
+				temp.setLogin(GameState.notifyLogin());
+			}
 		}
 	}
 
