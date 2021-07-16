@@ -2,9 +2,10 @@ package com.revature.menu;
 
 public abstract class Menu {
 	
-	String dash = "-";
-	String space = " ";
-	String line = new String("|"+repeatedString(26, dash) + "|");
+	//String dash = "-";
+	//String space = " ";
+	String line = new String("|"+repeatedString(26, "-") + "|");
+	String blank = new String("|"+repeatedString(26," ")+"|");
 
 	public abstract Menu printMenu();
 	

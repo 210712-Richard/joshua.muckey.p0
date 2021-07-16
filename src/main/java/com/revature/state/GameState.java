@@ -18,7 +18,7 @@ public class GameState {
 						loginAttempt = false;
 					}else {
 						loginAttempt = false;
-						menu.tryAgain();
+						//menu.tryAgain();
 					}	
 				}else if(quit) {
 					

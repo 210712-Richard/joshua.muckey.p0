@@ -12,12 +12,29 @@ public class LoginResponseMenu extends Menu {
 
 	@Override
 	public Menu printMenu() {
+		pause();
 		if(login) {
 			System.out.println(line);
 			System.out.println("| Welcome " + user + "! |");
 			return new MainMenu(user, type);
 		}
-		return null;
+		System.out.println();
+		System.out.println(line);
+		System.out.println("| Sorry, " + user + " is not a User|");
+		System.out.println("|     Please try again!    |");
+		System.out.println(blank);
+		System.out.println(line);
+		System.out.println();
+		return new LoginMenu();
+	}
+	private void pause() {
+		long start = System.currentTimeMillis();
+		long next;
+		long run = 0;
+		while(run < 1000) {
+			next = System.currentTimeMillis();
+			run = next - start;
+		}
 	}
 
 	public boolean isLogin() {

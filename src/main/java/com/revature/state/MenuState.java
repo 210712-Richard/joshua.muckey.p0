@@ -19,6 +19,7 @@ public class MenuState {
 			currentMenu = currentMenu.printMenu();
 			if(currentMenu instanceof LoginResponseMenu) {
 				LoginResponseMenu temp = ((LoginResponseMenu)currentMenu);
+				loginAttempt = temp.getUser();
 				temp.setType(type);
 				temp.setLogin(GameState.notifyLogin());
 			}
@@ -31,10 +32,6 @@ public class MenuState {
 
 	public void successfulLogin() {
 		System.out.println("Successful Login " + (type == 1 ? "Admin!" : "Player"));
-	}
-
-	public void tryAgain() {
-		System.out.println("Sorry try again");
 	}
 
 	public void type(int type) {
