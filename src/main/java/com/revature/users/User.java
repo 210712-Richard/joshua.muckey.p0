@@ -5,12 +5,15 @@ import java.io.Serializable;
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 2410782848277166301L;
+	private Integer id;
+	private static int counter = 0;
 	private String username;
 	private String adventureFileName;
 	private UserType type;
 	
 	public User(String username) {
 		super();
+		this.id = new Integer(counter++);
 		this.username = username;
 		this.type = UserType.PLAYER;
 	}
