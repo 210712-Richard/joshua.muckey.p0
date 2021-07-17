@@ -5,7 +5,7 @@ import com.revature.users.UserBase;
 
 public class UserState {
 
-	private UserBase users = new UserBase();
+	public UserBase users = new UserBase();
 	private User selectedUser = null;
 	
 	public boolean login(String attempt) {
