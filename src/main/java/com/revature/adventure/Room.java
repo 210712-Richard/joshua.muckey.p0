@@ -2,6 +2,7 @@ package com.revature.adventure;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 
 public abstract class Room implements Serializable{
 
@@ -11,12 +12,27 @@ public abstract class Room implements Serializable{
 	private static final long serialVersionUID = -740387222736760593L;
 
 	private String description;
-	private LinkedList<IAction> takeableActions = new LinkedList<IAction>();
-	private Room nextRoom;
-	private Room previousRoom;
+	private LinkedList<Action> takeableActions = new LinkedList<Action>();
 	
-	public abstract void enterRoom();
-	public abstract void setupRoom();
+	public Room(String description) {
+		super();
+		this.setDescription(description);
+	}
+	public Room(String description, Action... action) {
+			this.description = description;
+			for(Action a: action) {
+				takeableActions.add(a);
+			}
+	}
+	public Room(String description, List<Action> actions) {
+		this.description = description;
+		for(Action a: actions) {
+			takeableActions.add(a);
+		}
+	}
+	
+	public abstract String displayActions();
+	public abstract String enterRoom();
 
 	public final String getDescription() {
 		return description;
@@ -24,24 +40,10 @@ public abstract class Room implements Serializable{
 	public final void setDescription(String description) {
 		this.description = description;
 	}
-	public final LinkedList<IAction> getTakeableActions() {
+	public final LinkedList<Action> getTakeableActions() {
 		return takeableActions;
 	}
-	public final void setTakeableActions(LinkedList<IAction> takeableActions) {
+	public final void setTakeableActions(LinkedList<Action> takeableActions) {
 		this.takeableActions = takeableActions;
-	}
-	public final Room getNextRoom() {
-		return nextRoom;
-	}
-	public final void setNextRoom(Room nextRoom) {
-		this.nextRoom = nextRoom;
-	}
-	public final Room getPreviousRoom() {
-		return previousRoom;
-	}
-	public final void setPreviousRoom(Room previousRoom) {
-		this.previousRoom = previousRoom;
-	}
-	
-	
+	}	
 }
