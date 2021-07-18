@@ -25,9 +25,9 @@ public class BeginningRoom extends Room {
 	@Override
 	public String displayActions() {
 		StringBuilder sb = new StringBuilder();
-//		for(IAction action: this.getTakeableActions()) {
-//			sb.append(action.Action());
-//		}
+		for(Action action: this.getTakeableActions()) {
+			sb.append(action.getDescription());
+		}
 		return sb.toString();
 	}
 
