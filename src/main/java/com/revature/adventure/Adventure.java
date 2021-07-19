@@ -10,6 +10,7 @@ public class Adventure implements Serializable{
 	 */
 	private static final long serialVersionUID = 5530775947993281960L;
 	private AdventureList list;
+	private int index;
 
 	private class AdventureList implements Serializable{
 		/**
@@ -20,6 +21,9 @@ public class Adventure implements Serializable{
 		
 	}
 	
-	
+	public String run() {
+//		return list.rooms.get(index).enterRoom();
+		return null;
+	}
 
 }
