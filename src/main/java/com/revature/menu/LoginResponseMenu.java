@@ -1,15 +1,24 @@
 package com.revature.menu;
-
+/**
+ * Concrete Menu for login Response
+ * @author MuckJosh
+ *
+ */
 public class LoginResponseMenu extends Menu {
 
 	private String user;
 	private int type;
 	private boolean login;
-
+	/**
+	 * Constructor takes a input user string
+	 * @param user input string from loginMenu.
+	 */
 	LoginResponseMenu(String user) {
 		this.user = user;
 	}
-
+	/**
+	 * Prints Menu and if login prints 
+	 */
 	@Override
 	public Menu printMenu() {
 		pause();
@@ -27,6 +36,9 @@ public class LoginResponseMenu extends Menu {
 		System.out.println();
 		return new LoginMenu();
 	}
+	/**
+	 * simulate the computer thinking.
+	 */
 	private void pause() {
 		long start = System.currentTimeMillis();
 		long next;
