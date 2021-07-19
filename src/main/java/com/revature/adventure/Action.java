@@ -1,9 +1,22 @@
+
 package com.revature.adventure;
+
+/**
+ * Action is the base for any action taken in a room.
+ * 
+ * @author MuckJosh
+ * @see Room
+ */
 
 public abstract class Action implements IPerform{
 
 	private String description;
 	
+	/**
+	 * <h1>Constructor for a base action</h1>
+	 * <p>A description of the action is required for printing</p>
+	 * @param description description of the action.
+	 */
 	public Action(String description) {
 		super();
 		this.description = description;
@@ -16,6 +29,10 @@ public abstract class Action implements IPerform{
 	public final void setDescription(String description) {
 		this.description = description;
 	}
+	/**
+	 * @param Room should always take in currentRoom to alter currentRoom 
+	 * after action or change rooms connected to current room
+	 */
 	public abstract Room perform(Room currentRoom);
 
 }

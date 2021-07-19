@@ -6,9 +6,8 @@ import java.util.LinkedList;
 
 import com.revature.util.DataSerializer;
 
-public class UserBase implements Serializable{
+public class UserBase{
 	//this class handles user data
-	private static final long serialVersionUID = 5529604745131923690L;
 	public MyList list;
 	private final String userDataBase = System.getProperty("user.dir")+"\\src\\main\\resources\\users.dat";
 	

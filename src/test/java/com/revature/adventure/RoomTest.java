@@ -17,8 +17,8 @@ public class RoomTest {
 		
 		str = "description";
 		action = new DoorAction(str, Direction.CURRENT);
-		demoRoom = new BeginningRoom(str);
-		demoActionRoom = new BeginningRoom(str, action);
+		demoRoom = new NormalRoom(str);
+		demoActionRoom = new NormalRoom(str, action);
 		
 	}
 	@Test
