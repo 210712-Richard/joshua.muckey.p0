@@ -8,7 +8,7 @@ public class StartMenu extends Menu {
 
 	@Override
 	public Menu printMenu() {
-		
+				this.user = null;
 				System.out.println(line);
 				System.out.println("|Welcome to Text Adventure!|");
 				System.out.println("|"+Menu.repeatedString(5,  " ")+"By Joshua Muckey" +Menu.repeatedString(5, " ")+"|");
@@ -29,7 +29,7 @@ public class StartMenu extends Menu {
 	}
 
 	private Menu menuSelection(int selection) {
-		if(selection >= arr.length)
+		if(selection > arr.length)
 			return new QuitMenu();
 		return arr[selection-1];
 	}

@@ -1,15 +1,18 @@
 package com.revature.menu;
 
+import com.revature.users.User;
 import com.revature.util.SingletonScanner;
+
+
 /**
  * Concrete of Menu used for Login functions.
+ * 
  * @author MuckJosh
  */
 public class LoginMenu extends Menu {
 
 	/**
-	 * User input is grabbed and addressed in response.
-	 * exit is a restricted username.
+	 * User input is grabbed and addressed in response. exit is a restricted string.
 	 */
 	@Override
 	public Menu printMenu() {
@@ -18,9 +21,11 @@ public class LoginMenu extends Menu {
 		System.out.println(blank);
 		System.out.println("| Please enter username: ");
 		String user = SingletonScanner.getScanner().getNext();
-		if(user.equalsIgnoreCase("exit"))
+		
+		if (user.equalsIgnoreCase("exit"))
 			return new StartMenu();
-		return new LoginResponseMenu(user);
+		User temp = new User(user);
+		this.user = temp;
+		return new LoginResponseMenu();
 	}
 }
-

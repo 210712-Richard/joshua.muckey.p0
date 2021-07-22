@@ -48,8 +48,9 @@ public class NormalRoom extends Room {
 	@Override
 	public String displayActions() {
 		StringBuilder sb = new StringBuilder();
+		int i = 0;
 		for(Action action: this.getTakeableActions()) {
-			sb.append(action.getDescription());
+			sb.append("\n"+i++ +". "+ action.getDescription());
 		}
 		return sb.toString();
 	}

@@ -1,6 +1,8 @@
 
 package com.revature.adventure;
 
+import java.io.Serializable;
+
 /**
  * Action is the base for any action taken in a room.
  * 
@@ -8,8 +10,9 @@ package com.revature.adventure;
  * @see Room
  */
 
-public abstract class Action implements IPerform{
+public abstract class Action implements IPerform, Serializable{
 
+	private static final long serialVersionUID = 667751492414922077L;
 	private String description;
 	
 	/**

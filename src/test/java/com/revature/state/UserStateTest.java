@@ -39,9 +39,9 @@ public class UserStateTest {
 	@Test
 	public void loginTest() {
 		when(u.getUsername()).thenReturn("test");
-		assertFalse(users.login(u.getUsername()), "Check if user is in userBase");
+		assertFalse(users.login(), "Check if user is in userBase");
 		when(base.getUser(u.getUsername())).thenReturn(u);
-		assertTrue(users.login(u.getUsername()),"Check if pre-registered user is in");
+		assertTrue(users.login(),"Check if pre-registered user is in");
 	}
 	@Test
 	public void getTypeTest() {

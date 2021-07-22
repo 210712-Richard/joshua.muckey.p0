@@ -1,15 +1,20 @@
 package com.revature.users;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
-
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.revature.util.DataSerializer;
 
-public class UserBase{
+public class UserBase implements Serializable{
+	
+	private static final long serialVersionUID = -938251342446948320L;
 	//this class handles user data
-	public MyList list;
-	private final String userDataBase = System.getProperty("user.dir")+"\\src\\main\\resources\\users.dat";
+	private MyList list;
+	private static final String userDataBase = System.getProperty("user.dir")+"\\src\\main\\resources\\users.dat";
 	
 	class MyList implements Serializable{
 		//wrapper class to make serialization easier
@@ -60,6 +65,10 @@ public class UserBase{
 		}
 		return null;
 	}
+	public List<User> getUsers(Predicate<? super User> input){
+		return list.users.stream().filter(input).collect(Collectors.toList());
+				
+	}
 	
 	public void save() {
 		DataSerializer<MyList> ds = new DataSerializer<MyList>();
@@ -67,7 +76,12 @@ public class UserBase{
 	}
 	public void load() {
 		DataSerializer<MyList> ds = new DataSerializer<MyList>();
-		list = (MyList) ds.readObjectFromFile(userDataBase);
+		try {
+			list = (MyList) ds.readObjectFromFile(userDataBase);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

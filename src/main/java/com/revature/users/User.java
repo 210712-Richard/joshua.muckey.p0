@@ -19,6 +19,20 @@ public class User implements Serializable{
 		this.type = UserType.PLAYER;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", adventureFileName=" + adventureFileName + ", type="
+				+ type + "]";
+	}
+
 	public String getUsername() {
 		return username;
 	}
