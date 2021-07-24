@@ -58,7 +58,7 @@ public class Driver {
 //		
 //		adventure.save("base\\base");
 //		
-		GameState game = new GameState();
+		GameService game = GameService.getGameService();
 		game.run();
 	}
 

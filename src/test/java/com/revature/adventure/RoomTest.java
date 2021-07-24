@@ -29,10 +29,10 @@ public class RoomTest {
 		assertEquals(demoRoom.enterRoom(),str);
 		
 		//mock action returns str
-		assertEquals(str,demoActionRoom.displayActions());
+		assertEquals("\n0. "+str,demoActionRoom.displayActions());
 		
 		//check str + str is returned
-		assertEquals(str+str, demoActionRoom.enterRoom());
+		assertEquals(str+"\n0. "+str, demoActionRoom.enterRoom());
 		
 	}
 }

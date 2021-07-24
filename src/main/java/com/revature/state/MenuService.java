@@ -12,12 +12,12 @@ import com.revature.menu.LoginResponseMenu;
 import com.revature.menu.Menu;
 import com.revature.menu.RegisterResponseMenu;
 
-public class MenuState {
+public class MenuService {
 
 	private Menu currentMenu;
-	private User user = null;
+	private static User user = null;
 
-	MenuState() {
+	MenuService() {
 		currentMenu = new StartMenu();
 	}
 
@@ -27,17 +27,18 @@ public class MenuState {
 			if(currentMenu instanceof LoginResponseMenu) {
 				LoginResponseMenu temp = (LoginResponseMenu)currentMenu;
 				UserDTO dto = new UserDTO(Stream.of(currentMenu.getUser()).collect(Collectors.toList()));
-				GameState.putTransfer(dto);
-				GameState.notifyLogin();
-				user = ((List<User>)GameState.getTransfer().getData()).get(0);
+				GameService.getGameService().putTransfer(dto);
+				GameService.getGameService().notifyLogin();
+				user = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
 				if(user != null)
+					Menu.setUser(user);
 					temp.setLogin(true);
 			}else if(currentMenu instanceof RegisterResponseMenu) {
 				RegisterResponseMenu temp = ((RegisterResponseMenu) currentMenu);
 				UserDTO dto = new UserDTO(Stream.of(temp.getUser()).collect(Collectors.toList())); 
-				GameState.putTransfer(dto);
-				GameState.notifyRegister();
-				user = ((List<User>)GameState.getTransfer().getData()).get(0);
+				GameService.getGameService().putTransfer(dto);
+				GameService.getGameService().notifyRegister();
+				user = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
 				if(user != null) 
 					temp.setRegistered(true);
 			}

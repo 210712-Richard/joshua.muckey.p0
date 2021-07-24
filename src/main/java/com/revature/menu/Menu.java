@@ -12,7 +12,7 @@ public abstract class Menu {
 	
 	protected String line = new String("|"+repeatedString(26, "-") + "|");
 	protected String blank = new String("|"+repeatedString(26," ")+"|");
-	protected User user = null;
+	protected static User user = null;
 	protected int type = 0;
 
 	/**
@@ -32,8 +32,8 @@ public abstract class Menu {
 	protected static String repeatedString(int x, String c) {
 		return new String(new char[x]).replace("\0", c);
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public static void setUser(User user) {
+		Menu.user = user;
 	}
 	public User getUser() {
 		return user;

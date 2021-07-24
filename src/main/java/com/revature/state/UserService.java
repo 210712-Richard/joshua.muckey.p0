@@ -9,19 +9,24 @@ import com.revature.users.User;
 import com.revature.users.UserBase;
 import com.revature.util.UserDTO;
 
-public class UserState {
+public class UserService {
 
 	public UserBase users = new UserBase();
 	private User selectedUser = null;
 	
-	public void login() {
-		User attempt =((List<User>)GameState.getTransfer().getData()).get(0);
+	
+	public boolean login() {
+		
+		@SuppressWarnings("unchecked")
+		User attempt =((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
 		selectedUser = users.getUser(attempt.getUsername());
 		if(selectedUser!= null) {
 			UserDTO dto = new UserDTO(Stream.of(selectedUser).collect(Collectors.toList()));
-			GameState.putTransfer(dto);
+			GameService.getGameService().putTransfer(dto);
+			return true;
 		}else {
-			GameState.putTransfer(null);
+			GameService.getGameService().putTransfer(null);
+			return false;
 		}
 		
 	}
@@ -38,19 +43,19 @@ public class UserState {
 		users.save();
 	}
 	public void register() {
-		User attempt = ((List<User>)GameState.getTransfer().getData()).get(0);;
+		User attempt = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);;
 		selectedUser = users.addUser(attempt.getUsername());
 		if(selectedUser!= null) {
 			UserDTO dto = new UserDTO(Stream.of(selectedUser).collect(Collectors.toList()));
-			GameState.putTransfer(dto);
+			GameService.getGameService().putTransfer(dto);
 		}else {
-			GameState.putTransfer(null);
+			GameService.getGameService().putTransfer(null);
 		}
 	}
 	public void adminRequest() {
-		Predicate<? super User> input = (Predicate<? super User>) GameState.getTransfer().getData();
+		Predicate<? super User> input = (Predicate<? super User>) GameService.getGameService().getTransfer().getData();
 		UserDTO data = new UserDTO(users.getUsers(input));
-		GameState.putTransfer(data);
+		GameService.getGameService().putTransfer(data);
 		
 	}
 	

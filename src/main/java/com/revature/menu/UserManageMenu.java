@@ -2,7 +2,7 @@ package com.revature.menu;
 
 import java.util.List;
 
-import com.revature.state.GameState;
+import com.revature.state.GameService;
 import com.revature.users.User;
 import com.revature.util.PredicateDTO;
 import com.revature.util.SingletonScanner;
@@ -15,7 +15,7 @@ public class UserManageMenu extends Menu {
 		System.out.println("|\t1. User List");
 		System.out.println("|\t2. Get Info on one\n");
 		System.out.println("|\t3. Back");
-		Integer x = SingletonScanner.getScan().nextInt();
+		Integer x = Integer.parseInt(SingletonScanner.getScan().nextLine());
 		//TODO remove data transfer to MenuState
 		PredicateDTO data = null;
 		switch(x) {
@@ -24,16 +24,17 @@ public class UserManageMenu extends Menu {
 		case 2:
 			System.out.println("Please input username(can be partial):");
 			String uInput = SingletonScanner.getScan().nextLine();
+			
 			data = new PredicateDTO(uInput);
 			break;
 		case 1:
-			data = new PredicateDTO(null);
+			data = new PredicateDTO("");
 			break;
 		}
 		
-		GameState.putTransfer(data);
-		GameState.adminRequet();
-		List<User> users = (List<User>) GameState.getTransfer().getData();
+		GameService.getGameService().putTransfer(data);
+		GameService.getGameService().adminRequet();
+		List<User> users = (List<User>) GameService.getGameService().getTransfer().getData();
 		if(users.size() == 1) {
 			return new InfoMenu(users.get(0));
 		}

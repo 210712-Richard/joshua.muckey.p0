@@ -21,11 +21,10 @@ public class LoginMenu extends Menu {
 		System.out.println(blank);
 		System.out.println("| Please enter username: ");
 		String user = SingletonScanner.getScanner().getNext();
-		
 		if (user.equalsIgnoreCase("exit"))
 			return new StartMenu();
 		User temp = new User(user);
-		this.user = temp;
+		Menu.user = temp;
 		return new LoginResponseMenu();
 	}
 }

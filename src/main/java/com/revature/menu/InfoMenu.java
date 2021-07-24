@@ -12,12 +12,14 @@ public class InfoMenu extends Menu {
 
 	@Override
 	public Menu printMenu() {
-		int i = 1;
-		String str = user.toString().replaceAll(",", "\n" + i++);
+		
+		String str = user.toString().replaceAll("\\[", "\n").replaceAll("\\]", "").replaceAll(",", "\n");
 		System.out.println(str);
 		
 		System.out.println("To modify user input line number:");
 		SingletonScanner.getScan().nextInt();
+		
+		
 		return null;
 	}
 

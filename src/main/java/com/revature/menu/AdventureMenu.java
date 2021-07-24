@@ -1,6 +1,6 @@
 package com.revature.menu;
 
-import com.revature.state.GameState;
+import com.revature.state.GameService;
 import com.revature.util.InputDTO;
 import com.revature.util.SingletonScanner;
 
@@ -16,17 +16,17 @@ public class AdventureMenu extends Menu {
 	public Menu printMenu() {
 		System.out.println("type quit to quit at anytime!");
 		if(isFirst == false) {
-			GameState.notifyStart();
+			GameService.getGameService().notifyStart();
 			isFirst = true;
 		}
-		data = (String) GameState.getTransfer().getData();
+		data = (String) GameService.getGameService().getTransfer().getData();
 		System.out.println(data);
 		String str = null;
 		try{
 			str = SingletonScanner.getScan().nextLine();
 			Integer x = Integer.parseInt(str);
-			GameState.putTransfer(new InputDTO(x));
-			GameState.notifyAdventure();
+			GameService.getGameService().putTransfer(new InputDTO(x));
+			GameService.getGameService().notifyAdventure();
 			return new AdventureMenu();
 		}catch(NumberFormatException e) {
 			if(str.equalsIgnoreCase("quit")) {

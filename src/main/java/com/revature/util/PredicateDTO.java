@@ -16,8 +16,8 @@ public class PredicateDTO implements IDTO<Predicate<User>> {
 	@Override
 	public Predicate<User> getData() {
 		if(input.isEmpty() || input == null)
-			return p -> p != null;
-		return p -> p.getUsername().contains(input);
+			return (p -> p != null);
+		return (p -> p.getUsername().contains(input));
 	}
 
 }

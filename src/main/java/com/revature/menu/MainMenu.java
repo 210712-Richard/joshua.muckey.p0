@@ -19,7 +19,7 @@ public class MainMenu extends Menu {
 		System.out.println("|1. Start Adventure");
 		System.out.println("|2. User Info ");
 		System.out.println("|3. logout ");
-		if(this.user.getType() == UserType.ADMIN) {
+		if(Menu.user.getType() == UserType.ADMIN) {
 			System.out.println("| 4. Manage Users |");
 		}
 		
@@ -34,7 +34,7 @@ public class MainMenu extends Menu {
 		else {
 			try {
 				int x = Integer.parseInt(selection);
-				if(x == 4 && type != 1)
+				if(x == 4 && type == 1)
 					return this;
 				return menuArr[x-1];
 			}catch(NumberFormatException | IndexOutOfBoundsException e1) {
