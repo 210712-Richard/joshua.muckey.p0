@@ -1,5 +1,7 @@
 package com.revature.menu;
 
+import com.revature.util.IDTO;
+
 /**
  * Concrete Menu for login Response
  * 
@@ -43,6 +45,12 @@ public class LoginResponseMenu extends Menu {
 
 	public void setLogin(boolean login) {
 		this.login = login;
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

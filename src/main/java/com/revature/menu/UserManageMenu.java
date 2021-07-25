@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.state.GameService;
 import com.revature.users.User;
+import com.revature.util.IDTO;
 import com.revature.util.PredicateDTO;
 import com.revature.util.SingletonScanner;
 
@@ -49,6 +50,12 @@ public class UserManageMenu extends Menu {
 		User user = users.stream().filter(p->p.getId().equals(input)).findFirst().get();
 		
 		return new InfoMenu(user);
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

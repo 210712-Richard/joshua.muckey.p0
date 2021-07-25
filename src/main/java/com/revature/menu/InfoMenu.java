@@ -1,6 +1,7 @@
 package com.revature.menu;
 
 import com.revature.users.User;
+import com.revature.util.IDTO;
 import com.revature.util.SingletonScanner;
 
 public class InfoMenu extends Menu {
@@ -20,6 +21,12 @@ public class InfoMenu extends Menu {
 		SingletonScanner.getScan().nextInt();
 		
 		
+		return null;
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

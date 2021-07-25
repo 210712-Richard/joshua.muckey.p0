@@ -8,7 +8,7 @@ import com.revature.users.User;
  * @author MuckJosh
  *
  */
-public abstract class Menu {
+public abstract class Menu implements IReport{
 	
 	protected String line = new String("|"+repeatedString(26, "-") + "|");
 	protected String blank = new String("|"+repeatedString(26," ")+"|");

@@ -2,6 +2,7 @@ package com.revature.menu;
 
 import com.revature.users.User;
 import com.revature.util.SingletonScanner;
+import com.revature.util.UserDTO;
 
 
 /**
@@ -11,6 +12,7 @@ import com.revature.util.SingletonScanner;
  */
 public class LoginMenu extends Menu {
 
+	private User attempt;
 	/**
 	 * User input is grabbed and addressed in response. exit is a restricted string.
 	 */
@@ -23,8 +25,13 @@ public class LoginMenu extends Menu {
 		String user = SingletonScanner.getScanner().getNext();
 		if (user.equalsIgnoreCase("exit"))
 			return new StartMenu();
-		User temp = new User(user);
-		Menu.user = temp;
+		attempt = new User(user);
 		return new LoginResponseMenu();
+	}
+
+	@Override
+	public UserDTO report() {
+		// TODO Auto-generated method stub
+		return new UserDTO(attempt);
 	}
 }

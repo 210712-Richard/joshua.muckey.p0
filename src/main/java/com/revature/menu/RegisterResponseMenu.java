@@ -1,6 +1,7 @@
 package com.revature.menu;
 
 import com.revature.users.User;
+import com.revature.util.IDTO;
 
 public class RegisterResponseMenu extends Menu {
 
@@ -29,5 +30,11 @@ public class RegisterResponseMenu extends Menu {
 
 	public void setRegistered(boolean isRegistered) {
 		this.isRegistered = isRegistered;
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

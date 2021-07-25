@@ -1,6 +1,7 @@
 package com.revature.menu;
 
 import com.revature.users.UserType;
+import com.revature.util.IDTO;
 import com.revature.util.SingletonScanner;
 
 public class MainMenu extends Menu {
@@ -44,8 +45,10 @@ public class MainMenu extends Menu {
 		}
 	}
 
-	public MainMenu() {
-		
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

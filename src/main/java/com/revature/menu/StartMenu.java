@@ -1,5 +1,6 @@
 package com.revature.menu;
 
+import com.revature.util.IDTO;
 import com.revature.util.SingletonScanner;
 
 public class StartMenu extends Menu {
@@ -32,6 +33,12 @@ public class StartMenu extends Menu {
 		if(selection > arr.length)
 			return new QuitMenu();
 		return arr[selection-1];
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

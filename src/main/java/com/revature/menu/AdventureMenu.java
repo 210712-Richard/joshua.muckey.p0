@@ -1,6 +1,7 @@
 package com.revature.menu;
 
 import com.revature.state.GameService;
+import com.revature.util.IDTO;
 import com.revature.util.InputDTO;
 import com.revature.util.SingletonScanner;
 
@@ -35,6 +36,12 @@ public class AdventureMenu extends Menu {
 			}
 			return this;
 		}
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

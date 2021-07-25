@@ -1,5 +1,6 @@
 package com.revature.menu;
 
+import com.revature.util.IDTO;
 import com.revature.util.SingletonScanner;
 
 public class RegisterMenu extends Menu {
@@ -22,6 +23,12 @@ public class RegisterMenu extends Menu {
 		
 		//log
 		return new RegisterResponseMenu();
+	}
+
+	@Override
+	public IDTO<?> report() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
