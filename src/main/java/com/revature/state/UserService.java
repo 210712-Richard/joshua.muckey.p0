@@ -23,7 +23,7 @@ public class UserService {
 	public boolean login() {
 		
 		@SuppressWarnings("unchecked")
-		User attempt =((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
+		User attempt =((List<User>) dto.getData()).get(0);
 		selectedUser = users.getUser(attempt.getUsername());
 		if(selectedUser!= null) {
 			UserDTO dto = new UserDTO(Stream.of(selectedUser).collect(Collectors.toList()));
@@ -70,7 +70,7 @@ public class UserService {
 		User original = list.get(0);
 		User update = list.get(1);
 		
-		if(update.getUsername() != null) {
+		if(update.getUsername() != null && users.getUser(update.getUsername()) == null) {
 			
 			original.setUsername(update.getUsername());
 		}

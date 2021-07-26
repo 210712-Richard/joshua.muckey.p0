@@ -32,18 +32,22 @@ public class GameService {
 		return dto;
 	}
 	public void notifyLogin() {
+		user.putTransfer(dto);
 		user.login();
 	}
 
 	public void adminRequet() {
+		user.putTransfer(dto);
 		user.adminRequest();
 	}
 
 	public void notifyRegister() {
+		user.putTransfer(dto);
 		user.register();
 	}
 
 	public void notifyQuit() {
+		user.putTransfer(dto);
 		user.save();
 	}
 
