@@ -68,12 +68,14 @@ public class UserService {
 	public void update() {
 		List<User> list = ((List<User>) dto.getData());
 		User original = list.get(0);
-		User update = list.get(1);
-		
-		if(update.getUsername() != null && users.getUser(update.getUsername()) == null) {
-			
+		User update = null;
+		if(list.size() == 2 && users.getUser(list.get(1).getUsername()) == null){
+			update = list.get(1);
 			original.setUsername(update.getUsername());
+			users.save();
+			dto = new UserDTO(users.updateUser(update));
 		}
+		
 		
 	}
 	public void putTransfer(IDTO<?> dto) {

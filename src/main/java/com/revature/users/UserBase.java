@@ -65,6 +65,15 @@ public class UserBase implements Serializable{
 		}
 		return null;
 	}
+	public User updateUser(User user) {
+		for(User u: list.users) {
+			if(user.getUsername().equals(u.getUsername())) {
+				u = user;
+				return u;
+			}
+		}
+		return null;
+	}
 	public List<User> getUsers(Predicate<? super User> input){
 		return list.users.stream().filter(input).collect(Collectors.toList());
 				

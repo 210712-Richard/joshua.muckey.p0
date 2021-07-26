@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-
 import com.revature.util.DataSerializer;
 
 /**
@@ -19,7 +18,7 @@ public class Adventure implements Serializable {
 	private static final long serialVersionUID = 5530775947993281960L;
 	public AdventureList list;
 	private String userName;
-	
+
 	private final String base = "base\\base";
 	private final String adventureFolder = System.getProperty("user.dir") + "\\src\\main\\resources\\adventureFiles\\";
 
@@ -40,8 +39,8 @@ public class Adventure implements Serializable {
 		this.userName = userName;
 		load(userName);
 		if (list == null) {
-			 load(base);
-			 save();
+			load(base);
+			save();
 		}
 
 	}
@@ -63,14 +62,14 @@ public class Adventure implements Serializable {
 			save();
 		}
 	}
+
 	private void load(String base) {
 
 		DataSerializer<AdventureList> ds = new DataSerializer<AdventureList>();
 		try {
 			list = (AdventureList) ds.readObjectFromFile(adventureFolder + base + ".dat");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 			save();
 		}
 	}
@@ -82,8 +81,8 @@ public class Adventure implements Serializable {
 	 * @see Room
 	 */
 	public String run() {
-		if(list.currentRoom == null)
-			 list.currentRoom = list.rooms.get(0);
+		if (list.currentRoom == null)
+			list.currentRoom = list.rooms.get(0);
 		return list.currentRoom.enterRoom();
 	}
 

@@ -40,11 +40,16 @@ public class UserManageMenu extends Menu {
 		}
 		
 		for(int i = 0; i<users.size(); i++) {
-			System.out.println((i+1) +". " + users.get(i).toString());
+			System.out.println(users.get(i).toString());
 		}
 		
 		System.out.println("To select a user input an id number:");
-		Integer input = SingletonScanner.getScan().nextInt();
+		Integer input;
+		try {
+			input = Integer.parseInt(SingletonScanner.getScan().nextLine());
+			}catch(NumberFormatException e) {
+				return new MainMenu();
+			}
 		
 		User user = users.stream().filter(p->p.getId().equals(input)).findFirst().get();
 		

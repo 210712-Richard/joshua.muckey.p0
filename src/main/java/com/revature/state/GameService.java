@@ -67,4 +67,10 @@ public class GameService {
 		
 	}
 
+	public void updateUser() {
+		// TODO Auto-generated method stub
+		user.putTransfer(dto);
+		user.update();
+	}
+
 }
