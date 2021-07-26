@@ -37,7 +37,7 @@ public class InfoMenu extends Menu {
 			User name = new User(str);
 			UserDTO dto = new UserDTO(Stream.of(user, name).collect(Collectors.toList()));
 			GameService.getGameService().putTransfer(dto);
-			GameService.getGameService().update();
+			GameService.getGameService().updateName();
 			break;
 		}
 		

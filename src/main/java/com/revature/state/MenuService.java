@@ -15,13 +15,10 @@ import com.revature.menu.RegisterResponseMenu;
 public class MenuService {
 
 	private Menu currentMenu;
-	private AdventureService adventure;
-	private UserService userService;
 	private static User user = null;
 
-	private MenuService() {
+	public MenuService() {
 		currentMenu = new StartMenu();
-		userService = new UserService();
 	}
 
 	public void openMenu() {
@@ -30,19 +27,27 @@ public class MenuService {
 			if(currentMenu instanceof LoginResponseMenu) {
 				LoginResponseMenu temp = (LoginResponseMenu)currentMenu;
 				UserDTO dto = new UserDTO(Stream.of(currentMenu.getUser()).collect(Collectors.toList()));
-				userService.putTransfer(dto);
-				if(userService.login())
-					user = ((List<User>)userService.getTransfer().getData()).get(0);
+				GameService.getGameService().putTransfer(dto);
+				GameService.getGameService().notifyLogin();
+				user = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
+				GameService.getGameService().putTransfer(dto);
+				GameService.getGameService().notifyLogin();
+				user = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
+				if(user != null) {
 					Menu.setUser(user);
 					temp.setLogin(true);
+				}
 			}else if(currentMenu instanceof RegisterResponseMenu) {
 				RegisterResponseMenu temp = ((RegisterResponseMenu) currentMenu);
 				UserDTO dto = new UserDTO(Stream.of(temp.getUser()).collect(Collectors.toList())); 
-				userService.putTransfer(dto);
-				if(userService.register()) { 
+				GameService.getGameService().putTransfer(dto);
+				GameService.getGameService().notifyRegister();
+				user = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
+				GameService.getGameService().putTransfer(dto);
+				GameService.getGameService().notifyRegister();
+				user = ((List<User>)GameService.getGameService().getTransfer().getData()).get(0);
+				if(user != null) 
 					temp.setRegistered(true);
-					user = ((List<User>)userService.getTransfer().getData()).get(0);
-				}
 			}
 		}
 	}

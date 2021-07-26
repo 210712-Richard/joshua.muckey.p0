@@ -6,6 +6,8 @@ public class GameService {
 
 	private static GameService instance;
 	private MenuService menu = new MenuService();
+	private UserService user = new UserService();
+	private AdventureService adventure;
 	
 	private IDTO<?> dto = null;
 
@@ -29,9 +31,20 @@ public class GameService {
 	public  IDTO<?> getTransfer() {
 		return dto;
 	}
+	public void notifyLogin() {
+		user.login();
+	}
+
+	public void adminRequet() {
+		user.adminRequest();
+	}
+
+	public void notifyRegister() {
+		user.register();
+	}
 
 	public void notifyQuit() {
-		UserService.getUserService().save();
+		user.save();
 	}
 
 	public void notifyAdventure() {
@@ -42,6 +55,12 @@ public class GameService {
 		//TODO
 		adventure = new AdventureService(user.getUserAdventureFile(), user.getUsername());
 
+	}
+
+	public void updateName() {
+		user.putTransfer(dto);
+		user.update();
+		
 	}
 
 }
