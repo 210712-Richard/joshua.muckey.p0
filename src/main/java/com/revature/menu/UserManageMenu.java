@@ -32,7 +32,7 @@ public class UserManageMenu extends Menu {
 			break;
 		}
 		
-		GameService.getGameService().putTransfer(data);
+		UserService.putTransfer(data);
 		GameService.getGameService().adminRequet();
 		List<User> users = (List<User>) GameService.getGameService().getTransfer().getData();
 		if(users.size() == 1) {
