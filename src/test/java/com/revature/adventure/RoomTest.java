@@ -16,7 +16,7 @@ public class RoomTest {
 	public void setupTest() {
 		
 		str = "description";
-		action = new DoorAction(str, Direction.CURRENT);
+		action = new MoveAction(str, Direction.CURRENT);
 		demoRoom = new NormalRoom(str);
 		demoActionRoom = new NormalRoom(str, action);
 		

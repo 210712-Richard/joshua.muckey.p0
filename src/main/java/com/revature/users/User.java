@@ -14,9 +14,12 @@ public class User implements Serializable{
 	
 	public User(String username) {
 		super();
-		this.id = new Integer(counter++);
+		this.id = getNextId();
 		this.username = username;
 		this.type = UserType.PLAYER;
+	}
+	public User() {
+		type = UserType.PLAYER;
 	}
 
 	public Integer getId() {
@@ -73,6 +76,9 @@ public class User implements Serializable{
 				&& type == other.type && Objects.equals(username, other.username);
 	}
 	
+	private static int getNextId() {
+		return counter++;
+	}
 	
 	
 }

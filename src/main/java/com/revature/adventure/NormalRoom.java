@@ -50,7 +50,8 @@ public class NormalRoom extends Room {
 		StringBuilder sb = new StringBuilder();
 		int i = 0;
 		for(Action action: this.getTakeableActions()) {
-			sb.append("\n"+i++ +". "+ action.getDescription());
+			if(action.isDisplay())
+				sb.append("\n"+i++ +". "+ action.getDescription());
 		}
 		return sb.toString();
 	}

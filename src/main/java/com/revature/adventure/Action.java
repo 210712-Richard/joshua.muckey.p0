@@ -2,6 +2,7 @@
 package com.revature.adventure;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * Action is the base for any action taken in a room.
@@ -10,10 +11,11 @@ import java.io.Serializable;
  * @see Room
  */
 
-public abstract class Action implements IPerform, Serializable{
+public abstract class Action extends Observable implements IPerform, Serializable{
 
 	private static final long serialVersionUID = 667751492414922077L;
 	private String description;
+	private boolean display = true;
 	
 	/**
 	 * <h1>Constructor for a base action</h1>
@@ -37,5 +39,13 @@ public abstract class Action implements IPerform, Serializable{
 	 * after action or change rooms connected to current room
 	 */
 	public abstract Room perform(Room currentRoom);
+
+	public boolean isDisplay() {
+		return display;
+	}
+
+	public void setDisplay(boolean display) {
+		this.display = display;
+	}
 
 }
