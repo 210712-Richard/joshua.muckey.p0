@@ -83,6 +83,10 @@ public class Adventure implements Serializable {
 		this.userName = userName;
 		load(userName);
 	}
+	private Adventure(String userName) {
+		this.userName = userName;
+		load();
+	}
 
 	public void save() {
 		DataSerializer<AdventureList> ds = new DataSerializer<AdventureList>();
@@ -112,6 +116,13 @@ public class Adventure implements Serializable {
 			list = createBase();
 			saveBase();
 		}
+	}
+	
+	public Adventure restart() {
+		// TODO Auto-generated method stub
+		Adventure newAdventure =  new Adventure(userName);
+		newAdventure.list.currentRoom = null;
+		return newAdventure;
 	}
 
 	/**

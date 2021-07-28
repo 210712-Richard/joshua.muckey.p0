@@ -27,6 +27,8 @@ public class Driver {
 
 		app.get("/users/:username/adventure", ac::startAdventure);
 		
+		app.post("/users/:username/adventure/restart", ac::restartAdventure);
+		
 		app.patch("/users/:username/adventure/:num", ac::takeAction);
 		
 		

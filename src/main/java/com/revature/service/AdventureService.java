@@ -39,5 +39,9 @@ public class AdventureService {
 		return str;
 		
 	}
+	public void restart() {
+		adventure = adventure.restart();
+		adventure.save();
+	}
 
 }

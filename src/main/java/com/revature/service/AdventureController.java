@@ -43,4 +43,19 @@ public class AdventureController {
 		String num = ctx.pathParam("num", String.class).getOrNull();
 		ctx.result(as.update(num));
 	}
+	public void restartAdventure(Context ctx) {
+		String username = ctx.pathParam("username");
+		User loggedUser = (User) ctx.sessionAttribute("loggedUser");
+		// if we aren't logged in or our username is different than the logged in username
+		if(loggedUser == null || !loggedUser.getUsername().equals(username)) {
+			ctx.status(403);
+			return;
+		}
+		if(as == null) {
+			ctx.status(403);
+			return;
+		}
+		
+		as.restart();
+	}
 }
