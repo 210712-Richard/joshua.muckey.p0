@@ -1,7 +1,7 @@
 package com.revature.util;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,7 +14,7 @@ public class DataSerializer<T> {
 	@SuppressWarnings("unchecked")
 	public T readObjectFromFile(String filename) throws IOException{
 		T object = null;
-		try (ObjectInputStream o = new ObjectInputStream(new FileInputStream(filename));) {
+		try (ObjectInputStream o = new ObjectInputStream(new FileInputStream(new File(filename)));) {
 			
 			object = (T) o.readObject();
 
@@ -27,7 +27,7 @@ public class DataSerializer<T> {
 	}
 
 	public void writeObjectsToFile(T object, String filename) {
-		try (ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(filename));) {
+		try (ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(new File(filename)));) {
 			o.writeObject(object);
 		} catch (IOException e) {
 			e.printStackTrace();

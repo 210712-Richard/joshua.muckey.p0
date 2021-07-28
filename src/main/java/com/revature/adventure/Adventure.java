@@ -2,8 +2,10 @@ package com.revature.adventure;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.stream.Collectors;
@@ -12,7 +14,6 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.revature.service.UserController;
 import com.revature.util.DataSerializer;
 
 /**
@@ -27,7 +28,7 @@ public class Adventure implements Serializable {
 	private static final long serialVersionUID = 5530775947993281960L;
 	public AdventureList list;
 	private String userName;
-	private final String base = "base\\base";
+	private final String base = "base";
 	private final String adventureFolder = System.getProperty("user.dir") + "\\src\\main\\resources\\adventureFiles\\";
 	private Logger log = LogManager.getLogger(Adventure.class);
 
@@ -44,17 +45,20 @@ public class Adventure implements Serializable {
 		protected LinkedList<Room> rooms = new LinkedList<Room>();
 		private Room currentRoom = null;
 		private LinkedList<Checkpoint> points = Stream.of(Checkpoint.values()).collect(Collectors.toCollection(LinkedList::new));
+		private EnumMap<Checkpoint, InterAction> pointsMap = new EnumMap<Checkpoint, InterAction>(Checkpoint.class);
 
 		@Override
 		public void update(Observable o, Object arg) {
-			if(o instanceof InterAction) {
-			Checkpoint point = ((InterAction) o).getPoint();
-			log.debug(points.pop().equals(point));
-			rooms.stream().forEach(c->c.getTakeableActions().stream()
-					.filter(p ->p instanceof InterAction)
-					.map(p-> (InterAction) p).collect(Collectors.toList()).stream()
-					.filter(p -> p.getPoint().equals(points.peek())).findAny().get().setDisplay(true));
-			log.debug(points);
+			try {
+			points.pop();
+			pointsMap.get(points.peek()).setDisplay(true);
+			}catch(NullPointerException e) {
+				MoveAction a = (MoveAction)currentRoom.getTakeableActions().stream()
+						.filter(p->p.getDescription().contains("Front"))
+						.findFirst().get();
+				a.setLocked(false);
+			}catch(NoSuchElementException e1) {
+				
 			}
 		}
 
@@ -84,6 +88,10 @@ public class Adventure implements Serializable {
 		DataSerializer<AdventureList> ds = new DataSerializer<AdventureList>();
 		ds.writeObjectsToFile(list, adventureFolder + userName + ".dat");
 	}
+	private void saveBase() {
+		DataSerializer<AdventureList> ds = new DataSerializer<AdventureList>();
+		ds.writeObjectsToFile(list, adventureFolder + base + ".dat");
+	}
 
 
 	private void load(String file) {
@@ -92,8 +100,17 @@ public class Adventure implements Serializable {
 		try {
 			list = (AdventureList) ds.readObjectFromFile(adventureFolder + file + ".dat");
 		} catch (IOException e) {
+			load();
+		}
+	}
+	private void load() {
 
+		DataSerializer<AdventureList> ds = new DataSerializer<AdventureList>();
+		try {
+			list = (AdventureList) ds.readObjectFromFile(adventureFolder + base + ".dat");
+		} catch (IOException e) {
 			list = createBase();
+			saveBase();
 		}
 	}
 
@@ -110,16 +127,27 @@ public class Adventure implements Serializable {
 	}
 
 	public String takeAction(Integer x) {
-		Room temp = list.currentRoom;
 		list.currentRoom = list.currentRoom.getTakeableActions().get(x).perform(list.currentRoom);
 		return list.currentRoom.enterRoom();
 	}
 
 	private AdventureList createBase() {
 		AdventureList list = new AdventureList();
+		InterAction a = new InterAction("Clean the glass", Checkpoint.LIBRARY_CLEAN,false);
+		InterAction a1 =new InterAction("place O", Checkpoint.LETTER_O, false);
+		InterAction a2 = new InterAction("Grab Cleaning Supplies", Checkpoint.MAID_SUPPLIES);
+		InterAction a3 = new InterAction("Answer this riddle", Checkpoint.LIBRARY_RIDDLE, false);
+		a.addObserver(list);
+		a1.addObserver(list);
+		a2.addObserver(list);
+		a3.addObserver(list);
+		list.pointsMap.put(a.getPoint(), a);
+		list.pointsMap.put(a1.getPoint(), a1);
+		list.pointsMap.put(a2.getPoint(), a2);
+		list.pointsMap.put(a3.getPoint(), a3);
 		Room foyer = new NormalRoom("You are in the Foyer with 4 doors and a picture of a person", new MoveAction("west door", Direction.LEFT, false), 
 				new MoveAction("North door", Direction.UP, true),
-				new MoveAction("South door", Direction.DOWN, true),
+				new MoveAction("Front door", Direction.DOWN, true),
 				new MoveAction("east Door", Direction.RIGHT, true),
 				new MoveAction("Picture", Direction.INNER));
 		Room gallery1 = new NormalRoom("You are in a gallery with 4 doors.",new MoveAction("east door", Direction.RIGHT, false), 
@@ -131,12 +159,12 @@ public class Adventure implements Serializable {
 				new MoveAction("West Door", Direction.LEFT, false));
 		Room great = new NormalRoom("You are in a Great Room with 2 doors.",new MoveAction("west door", Direction.LEFT, true), 
 				new MoveAction("South door", Direction.DOWN, false));
-		Room maid = new NormalRoom("You are in a maids room with 1 door.", new MoveAction("east door", Direction.RIGHT, false), new InterAction("Grab Cleaning Supplies", Checkpoint.MAID_SUPPLIES));
+		Room maid = new NormalRoom("You are in a maids room with 1 door.", new MoveAction("east door", Direction.RIGHT, false), a2);
 		Room library = new NormalRoom("You are in a Library with 1 door.", new MoveAction("North door", Direction.UP, false), new MoveAction("Glass Container locked", Direction.INNER, false));
 		
-		Room mainPicture = new NormalRoom("The picture on the wall is of Marc Blank and Dave Lebling. Creators of Z _ _ _. It appears letters are missing.", new MoveAction("Focus on Foyer",Direction.OUTER),new InterAction("place O", Checkpoint.LETTER_O, false));
+		Room mainPicture = new NormalRoom("The picture on the wall is of Marc Blank and Dave Lebling. Creators of Z _ _ _. It appears letters are missing.", new MoveAction("Focus on Foyer",Direction.OUTER), a1 );
 		
-		Room libGlass = new NormalRoom("A locked glass container, really dirty if you i had some cleaning supplies!", new MoveAction("Back to Library", Direction.OUTER), new InterAction("Clean the glass", Checkpoint.LIBRARY_CLEAN,false));
+		Room libGlass = new NormalRoom("A locked glass container, it's really dirty if only i had some cleaning supplies!", new MoveAction("Back to Library", Direction.OUTER), a, a3);
 		foyer.getAdjacentRooms().put(Direction.UP, great);
 		foyer.getAdjacentRooms().put(Direction.RIGHT, gallery2);
 		foyer.getAdjacentRooms().put(Direction.LEFT, gallery1);
@@ -171,8 +199,6 @@ public class Adventure implements Serializable {
 		list.getRooms().add(library);
 		list.getRooms().add(libGlass);
 		list.getRooms().add(mainPicture);
-		log.debug(list.getRooms().stream().peek(room -> room.getTakeableActions()
-				.stream().peek(action -> action.addObserver(list))));
 				
 		
 		return list;
